@@ -77,7 +77,7 @@ class SerialReader:
                     # Done
                     return identify_data
                 identify_data += msgdata
-    def _start_session(self, serial_dev, serial_fd_type='u', client_id=0):
+    def _start_session(self, serial_dev, serial_fd_type=b'u', client_id=0):
         self.serial_dev = serial_dev
         self.serialqueue = self.ffi_main.gc(
             self.ffi_lib.serialqueue_alloc(serial_dev.fileno(),
@@ -141,7 +141,7 @@ class SerialReader:
                 self.reactor.pause(self.reactor.monotonic() + 5.)
                 continue
             bus.close = bus.shutdown # XXX
-            ret = self._start_session(bus, 'c', txid)
+            ret = self._start_session(bus, b'c', txid)
             if not ret:
                 continue
             # Verify correct canbus_nodeid to canbus_uuid mapping
