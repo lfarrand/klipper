@@ -198,7 +198,7 @@ class SerialReader:
         self.serial_dev = debugoutput
         self.msgparser.process_identify(dictionary, decompress=False)
         self.serialqueue = self.ffi_main.gc(
-            self.ffi_lib.serialqueue_alloc(self.serial_dev.fileno(), 'f', 0),
+            self.ffi_lib.serialqueue_alloc(self.serial_dev.fileno(), b'f', 0),
             self.ffi_lib.serialqueue_free)
     def set_clock_est(self, freq, conv_time, conv_clock, last_clock):
         self.ffi_lib.serialqueue_set_clock_est(
