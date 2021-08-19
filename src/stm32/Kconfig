@@ -284,4 +284,6 @@ config CANBUS_FREQUENCY
     int "CAN bus speed" if LOW_LEVEL_OPTIONS && CANSERIAL
     default 500000
 
+source "src/stm32/t5uid1/Kconfig"
+
 endif
