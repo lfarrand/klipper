@@ -153,13 +153,18 @@ class Printer:
             logging.exception("Error in _get_versions()")
             return ""
     def _connect(self, eventtime):
+        logging.info("in _connect");
         try:
             self._read_config()
+            logging.info("in _connect after _read_config")
             self.send_event("klippy:mcu_identify")
+            logging.info("in _connect after send_event")
             for cb in self.event_handlers.get("klippy:connect", []):
+                logging.info("in _connect before invoking event handler")
                 if self.state_message is not message_startup:
                     return
                 cb()
+                logging.info("in _connect after invoking event handler")
         except (self.config_error, pins.error) as e:
             logging.exception("Config error")
             self._set_state("%s\n%s" % (str(e), message_restart))
